@@ -1,0 +1,44 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rowPages {
+  font-size: 22px;
+  display: flex;
+  align-items: flex-start;
+
+}
+
+.paginationNumber {
+  padding: 5px;
+  margin-left: 20px;
+  font-weight: 500;
+  transition: all .3s linear;
+}
+
+.active {
+  transform: scale(1.2, 1.05);
+  font-weight: 500;
+  transition: all .3s linear;
+  box-shadow: -1px -1px 1px rgb(61, 61, 61), 1px 1px 1px rgb(61, 61, 61);
+}
+
+.form {
+  width: 30px;
+  height: 30px;
+  display: flex;
+
+  & input{
+    width: 40px;
+    margin-right: 5px;
+    padding: 5px;
+  }
+
+  & button {
+
+  }
+}
+.labelInput {
+  margin-right: 10px;
+}

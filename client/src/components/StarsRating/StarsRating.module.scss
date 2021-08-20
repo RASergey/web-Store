@@ -1,0 +1,22 @@
+.wrapperStar {
+  display: inline-block;
+  height: 50px;
+  padding: 8px 5px 0 5px;
+}
+
+.star {
+  cursor: pointer;
+  height: 30px;
+  .faSecondary {
+    fill: #000;
+  }
+  .faPrimary {
+    fill: #fff;
+  }
+}
+
+.starsActive {
+  .faPrimary {
+    fill: gold;
+  }
+}

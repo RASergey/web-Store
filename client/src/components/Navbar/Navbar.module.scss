@@ -1,0 +1,50 @@
+.header {
+  background: rgb(66, 66, 66);
+  height: calc(50px + (60 - 50) * ((100vw - 280px) / (1920 - 280)));
+}
+
+.body {
+  padding: 0 5px;
+  display: flex;
+  height: inherit;
+  color: rgb(255, 255, 255);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navLink {
+  color: inherit;
+  font-size: calc(24px + (30 - 24) * ((100vw - 280px) / (1920 - 280)));
+  font-weight: 600;
+  transition: all 0.2s linear;
+
+  &:hover {
+    transition: all 0.2s linear;
+    color: inherit;
+    transform: scale(1.1, 1.1);
+  }
+}
+
+.nameUser {
+  padding: 0 5px;
+  font-size: 26px;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0), -1px -1px 2px rgb(0, 0, 0);
+}
+
+.headerButton {
+  transition: all 0.3s linear;
+  background: rgb(61, 61, 61);
+  color: rgb(211, 211, 211);
+  padding: 10px;
+
+  &:hover {
+    transition: all 0.3s linear;
+    color: rgb(61, 61, 61);
+    background: rgb(255, 255, 255);
+  }
+
+  &:not(:first-child) {
+    margin-left: 20px;
+  }
+}
