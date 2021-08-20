@@ -1,3 +1,4 @@
 .env
 .idea/
-/server/static/*.jpg
+node_modules/
+package-lock.json
