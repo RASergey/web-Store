@@ -11,10 +11,10 @@
 .modelSection {
   position: absolute;
   z-index: 10;
-  width: 60%;
+  width: 40%;
   height: 96%;
   top: .5vh;
-  left: 20%;
+  left: 30%;
   padding: 0 50px;
   overflow-y: auto;
   display: none;
@@ -34,20 +34,6 @@
 .buttonClose {
   padding: 10px;
   font-weight: 500;
-}
-
-.createBox {
-  display: flex;
-  height: 80%;
-  justify-content: space-between;
-}
-
-.formBox {
-  flex: 0 1 49%;
-}
-
-.descriptionBox {
-  flex: 0 1 49%;
 }
 
 .form {
@@ -70,9 +56,9 @@
 }
 
 .form input {
-  width: 100%;
+  width: 90%;
   position: relative;
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
 }
 
 .form select {
@@ -82,13 +68,8 @@
 }
 
 .form form div span {
-  right: 1%;
+  right: 12%;
   bottom: 10px;
-}
-
-.inputFile {
-  width: 280px;
-  margin: -40px 0 20px 10px;
 }
 
 .form button {

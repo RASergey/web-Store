@@ -1,13 +1,13 @@
-import style from '../Handling.module.scss'
+import style from './CreateDevice.module.scss'
 import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {Context} from '../../../index'
 import {createDevice, fetchBrands, fetchDevices, fetchTypes} from '../../../http/deviceAPI'
 import {observer} from 'mobx-react-lite'
-import {createForm} from '../../common/FormsControls/FormsControls'
+import FormsControls from '../../common/FormsControls/FormsControls'
 import * as yup from 'yup'
 import DescriptionDevice from './DescriptionsDevice/DescriptionsDevice'
 
-const DeviceHandling = observer(({show, onHide}) => {
+const CreateDevice = observer(({show, onHide}) => {
     const {device} = useContext(Context)
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -27,11 +27,8 @@ const DeviceHandling = observer(({show, onHide}) => {
         setTypeId(value.typeId)
         setName(value.name)
         setPrice(value.price)
+        setFile(value.image)
     }, [])
-
-    const selectFile = event => {
-        setFile(event.target.files[0])
-    }
 
     const addDevice = () => {
         const formData = new FormData()
@@ -57,6 +54,7 @@ const DeviceHandling = observer(({show, onHide}) => {
             .required('!'),
         brandId: yup.string()
             .required('!'),
+        image: yup.string()
     })
 
     const inputs = [
@@ -92,6 +90,12 @@ const DeviceHandling = observer(({show, onHide}) => {
             tabIndex: '4',
             placeholder: 'Введите стоимость устройства'
         },
+        {
+            nameInput: 'image',
+            typeInput: 'file',
+            initialValues: '',
+            tabIndex: '5',
+        },
     ]
 
     return (
@@ -107,15 +111,9 @@ const DeviceHandling = observer(({show, onHide}) => {
                                 Добавить новый тип
                             </div>
                             <div>
-                                {createForm(inputs, selectDevice, schema, 'Добавить')}
+                                <FormsControls inputs={inputs} createAction={selectDevice} schema={schema} nameButton={'Добавить'} />
                             </div>
                         </div>
-                        <input
-                            className={style.inputFile}
-                            type='file'
-                            onChange={selectFile}
-                            tabIndex='5'
-                        />
                     </div>
                     <div className={style.descriptionBox}>
                         <DescriptionDevice info={info} setInfo={setInfo}/>
@@ -129,4 +127,4 @@ const DeviceHandling = observer(({show, onHide}) => {
     )
 })
 
-export default DeviceHandling
+export default CreateDevice

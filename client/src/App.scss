@@ -93,7 +93,7 @@ h6 {
 /*Обнуление ===============================================================*/
 *:focus {
   transition: all .3s linear;
-  transform: scale(1.05 );
+  transform: scale(1.05, 1);
 }
 $color_1: rgb(211, 211, 211);
 $color_2: rgb(66, 66, 66);

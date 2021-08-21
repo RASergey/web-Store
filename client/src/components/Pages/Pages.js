@@ -2,8 +2,8 @@ import style from './Pages.module.scss'
 import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import {Context} from '../../index'
-import {createForm} from '../common/FormsControls/FormsControls'
 import * as yup from 'yup'
+import FormsControls from '../common/FormsControls/FormsControls'
 
 const Pages = observer(() => {
     const {device} = useContext(Context)
@@ -15,14 +15,15 @@ const Pages = observer(() => {
 
     const pages = []
 
-    for (let i = 1; i < pageCount; i++) {
+    for (let i = 0; i < pageCount; i++) {
         pages.push(i + 1)
     }
 
     const schema = yup.object().shape({
         limit: yup.number()
+            .typeError('введите число')
             .positive('не корректные данные')
-            .integer()
+            .integer('не корректные данные')
     })
 
     const inputs = [{
@@ -49,8 +50,8 @@ const Pages = observer(() => {
             </div>
             {pages.length !== 0 ?
                 <div className={style.form}>
-                    <label className={style.labelInput} htmlFor="input">Лимит девайсов.</label>
-                    {createForm(inputs, setLimit, schema, 'Ok')}
+                    <label className={style.limitLabel} htmlFor="input">Кол-во:</label>
+                    <FormsControls inputs={inputs} createAction={setLimit} schema={schema} nameButton={'Ok'} />
                 </div>
                 : null
             }

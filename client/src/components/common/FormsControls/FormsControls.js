@@ -1,30 +1,47 @@
 import style from './FormsControls.module.scss'
 import {Formik, Field, Form} from 'formik'
+import {useCallback, useState} from 'react'
 
-export const createForm = (inputs, createAction, schema, nameButton, tabindex = 0) => {
-
+const FormsControls = ({inputs, createAction, schema, nameButton}) => {
     const initialValues = {}
-    inputs.forEach(i => initialValues[`${i.nameInput}`] = i.initialValues);
+    const [fileURL, setFileURL] = useState(null)
+
+    inputs.forEach(i => initialValues[`${i.nameInput}`] = i.initialValues)
+
+    const createURLImage = useCallback((file) => {
+        let url = URL.createObjectURL(file)
+        setFileURL(url)
+        return () => URL.revokeObjectURL(url)
+    }, [setFileURL])
 
     return (
         <Formik
             initialValues={initialValues}
-            onSubmit={(values, { resetForm }) => {
-                createAction(values);
-                resetForm();
+            onSubmit={(values, {resetForm}) => {
+                createAction(values)
+                resetForm()
             }}
             validationSchema={schema}
         >
-            {({values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty}) => (
+            {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  isValid,
+                  handleSubmit,
+                  dirty
+              }) => (
                 <Form className={style.mainForm}>
                     {
                         inputs.map((input, index) => (
-                            <div key={index}>
+                            <div className={style.inputBox} key={index}>
                                 {(() => {
                                     switch (input.typeInput) {
                                         case 'input':
                                             return (
-                                                <div>
+                                                <div className={style.inputBox}>
                                                     <Field
                                                         type={input.nameInput}
                                                         as={input.typeInput}
@@ -34,7 +51,7 @@ export const createForm = (inputs, createAction, schema, nameButton, tabindex = 
                                                         onBlur={handleBlur}
                                                         id={input.id ? input.id : null}
                                                         placeholder={input.placeholder}
-                                                        tabIndex={input.tabIndex ? `${+input.tabIndex + tabindex}` : `${index + 1}`}
+                                                        tabIndex={input.tabIndex}
                                                         className={errors[`${input.nameInput}`] && touched[`${input.nameInput}`]
                                                             ? style.error : null}
                                                     />
@@ -52,8 +69,9 @@ export const createForm = (inputs, createAction, schema, nameButton, tabindex = 
                                                         component={input.typeInput}
                                                         as={input.typeInput}
                                                         name={input.nameInput}
-                                                        key={index}
-                                                        tabIndex={input.tabIndex ? `${+input.tabIndex + tabindex}` : `${index + 1}`}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        tabIndex={input.tabIndex}
                                                     >
                                                         {
                                                             input.options.map(item => (
@@ -68,6 +86,45 @@ export const createForm = (inputs, createAction, schema, nameButton, tabindex = 
                                                         (<span className={style.errorMessage}>
                                             					{errors[`${input.nameInput}`]}
                                                         </span>) : null}
+                                                </div>
+                                            )
+                                        case 'file':
+                                            return (
+                                                <div>
+                                                    <input
+                                                        id={input.nameInput}
+                                                        name={input.nameInput}
+                                                        type={input.typeInput}
+                                                        tabIndex={input.tabIndex}
+                                                        hidden={true}
+                                                        onChange={event => {
+                                                            let file = event.currentTarget.files[0]
+                                                            createURLImage(file)
+                                                            values[input.nameInput] = file
+                                                        }}
+                                                    />
+                                                    {
+                                                        errors[input.nameInput] && touched[input.nameInput] && (
+                                                            <div className="input-feedback">
+                                                                {errors[input.nameInput]}
+                                                            </div>
+                                                        )}
+                                                    <div className={style.fileImageBox}>
+                                                        {
+                                                            fileURL
+                                                                ?
+                                                                <img className={style.fileImage} src={fileURL} alt='/'/>
+                                                                :
+                                                                <button>
+                                                                    <label
+                                                                        className={style.fileLabel}
+                                                                        htmlFor={input.nameInput}
+                                                                    >
+                                                                        Добавить картинку
+                                                                    </label>
+                                                                </button>
+                                                        }
+                                                    </div>
                                                 </div>
                                             )
                                         default:
@@ -92,4 +149,4 @@ export const createForm = (inputs, createAction, schema, nameButton, tabindex = 
     )
 }
 
-
+export default FormsControls

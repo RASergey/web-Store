@@ -1,6 +1,6 @@
 import style from './DescriptionsDevice.module.scss'
-import React, {useCallback} from 'react';
-import {createForm} from '../../../common/FormsControls/FormsControls'
+import React, {useCallback} from 'react'
+import FormsControls from '../../../common/FormsControls/FormsControls'
 
 const DescriptionDevice = ({info, setInfo}) => {
 
@@ -32,7 +32,7 @@ const DescriptionDevice = ({info, setInfo}) => {
     return (
         <div className={style.descriptionBox}>
             <div className={style.form}>
-                {createForm(addDescription, addInfo, null, 'Добавить новое свойство')}
+                <FormsControls inputs={addDescription} createAction={addInfo} schema={null} nameButton={'Добавить новое свойство'} />
             </div>
             <div className={style.listDescription}>
                 {info.map((item, index) => (

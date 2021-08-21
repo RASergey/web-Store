@@ -7,7 +7,7 @@
 }
 
 .listDescription {
-  flex: 1 1 auto;
+  width: 100%;
   margin: 20px 0 10px;
   padding: 10px;
   font-size: 24px;
@@ -38,8 +38,11 @@
 }
 
 .form button {
+  flex: 0 0 240px;
+  margin-left: auto;
   padding: 10px 0;
   width: 90%;
   height: 45px;
+  font-size: 20px;
   font-weight: 500;
 }

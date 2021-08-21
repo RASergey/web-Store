@@ -1,10 +1,10 @@
-import style from '../Handling.module.scss'
+import style from './BrandTypeHandling.module.scss'
 import React, {useCallback, useContext} from 'react'
 import {createBrand, createType, deleteBrand, deleteType} from '../../../http/deviceAPI'
 import {Context} from '../../../index'
 import {observer} from 'mobx-react-lite'
 import * as yup from 'yup'
-import {createForm} from '../../common/FormsControls/FormsControls'
+import FormsControls from '../../common/FormsControls/FormsControls'
 
 const BrandTypeHandling = observer(({nameModal, show, onHide}) => {
     const {device} = useContext(Context)
@@ -41,7 +41,7 @@ const BrandTypeHandling = observer(({nameModal, show, onHide}) => {
         }
     ]
 
-    const select = [
+    const remove = [
         {
             nameInput: 'deviceId',
             typeInput: 'select',
@@ -66,7 +66,7 @@ const BrandTypeHandling = observer(({nameModal, show, onHide}) => {
                         Добавить новый {nameModal === 'brands' ? 'Бренд' : 'Тип'}
                     </div>
                     <div>
-                        {createForm(add, actionDevice, schema, 'Добавить')}
+                        <FormsControls inputs={add} createAction={actionDevice} schema={schema} nameButton={'Добавить'} />
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@ const BrandTypeHandling = observer(({nameModal, show, onHide}) => {
                         Удалить {nameModal === 'brands' ? 'Бренд' : 'Тип'}
                     </dir>
                     <div>
-                        {createForm(select, actionDevice, null, 'Удалить')}
+                        <FormsControls inputs={remove} createAction={actionDevice} schema={schema} nameButton={'Удалить'} />
                     </div>
                 </div>
             </section>

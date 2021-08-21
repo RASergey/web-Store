@@ -1,6 +1,6 @@
 import style from './Admin.module.scss'
 import React, {useState} from 'react'
-import DeviceHandling from '../../components/modals/DeviceHendling/DeviceHandling'
+import CreateDevice from '../../components/modals/DeviceHendling/CreateDevice'
 import BrandTypeHandling from '../../components/modals/BrandTypeHandling/BrandTypeHandling'
 
 const Admin = () => {
@@ -27,9 +27,9 @@ const Admin = () => {
                     onClick={() => setDeviceVisible(true)}
                     className={style.buttonAdmin}
                 >
-                    Добавить / Удалить устройство
+                    Добавить устройство
                 </button>
-                <DeviceHandling show={deviceVisible} onHide={() => setDeviceVisible(false)}/>
+                <CreateDevice show={deviceVisible} onHide={() => setDeviceVisible(false)}/>
                 <BrandTypeHandling nameModal={'brands'} show={brandVisible} onHide={() => setBrandVisible(false)}/>
                 <BrandTypeHandling nameModal={'types'} show={typeVisible} onHide={() => setTypeVisible(false)}/>
             </div>

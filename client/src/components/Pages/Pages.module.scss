@@ -25,20 +25,25 @@
 }
 
 .form {
-  width: 30px;
+  position: relative;
+  width: 40px;
   height: 30px;
   display: flex;
+  margin-right: 50px;
 
   & input{
-    width: 40px;
-    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
     padding: 5px;
   }
-
-  & button {
-
-  }
 }
-.labelInput {
+
+.limitLabel {
   margin-right: 10px;
+}
+
+.form form div span {
+  left: 90px;
 }

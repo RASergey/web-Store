@@ -1,11 +1,11 @@
 import style from './Auth.module.scss'
 import React, {useCallback, useContext} from 'react'
-import {NavLink, useLocation, useHistory} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../../utils/consts";
+import {NavLink, useLocation, useHistory} from 'react-router-dom'
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from '../../utils/consts'
 import {login, registration} from '../../http/userAPI'
 import {observer} from 'mobx-react-lite'
 import {Context} from '../../index'
-import {createForm} from '../../components/common/FormsControls/FormsControls'
+import FormsControls from '../../components/common/FormsControls/FormsControls'
 import * as yup from 'yup'
 
 const Auth = observer(() => {
@@ -61,7 +61,7 @@ const Auth = observer(() => {
                 <div className={style.form}>
                     <h2 className={style.title}>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
                     <div>
-                    {createForm(inputs, submitSetLogin, schema, isLogin ? 'Войти' : 'Регистрация')}
+                        <FormsControls inputs={inputs} createAction={submitSetLogin} schema={schema} nameButton={isLogin ? 'Войти' : 'Регистрация'} />
                     </div>
                 </div>
                 <div className={style.isAccount}>
