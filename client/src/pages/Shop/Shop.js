@@ -25,7 +25,7 @@ const Shop = observer(() => {
             device.setDevices(data.rows)
             device.setTotalCount(data.count)
         })
-    }, [device,device.page, device.selectedType, device.selectedBrand, device.limit])
+    }, [device, device.page, device.selectedType, device.selectedBrand, device.limit])
 
     return (
         <main className='container'>
@@ -35,13 +35,13 @@ const Shop = observer(() => {
                 </aside>
                 <section className={style.mainPage}>
                     <div>
-                    <BrandBar/>
+                        <BrandBar/>
                     </div>
-                    <div>
-                    <DeviceList/>
+                    <div className={style.deviceList}>
+                        <DeviceList/>
                     </div>
                     <div className={style.pages}>
-                    <Pages/>
+                        <Pages/>
                     </div>
                 </section>
             </div>

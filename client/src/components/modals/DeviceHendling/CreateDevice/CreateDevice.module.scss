@@ -26,7 +26,7 @@
 
 .buttonBox {
   width: 100%;
-  margin: 20px 0;
+  margin: 20px 0 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -38,7 +38,7 @@
 
 .createBox {
   display: flex;
-  padding: 5px;
+  padding: 0 5px;
   height: 80%;
   justify-content: space-between;
 }
@@ -76,15 +76,28 @@
   margin: 0 0 5px 0;
 }
 
-.form select {
-  position: relative;
-  top: -7px;
-  font-size: 24px;
+.form form div span {
+  right: 12%;
+  bottom: 10px;
 }
 
-.form form div span {
-  right: 1%;
-  bottom: 10px;
+.formSelects {
+  width: 90%;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.form select {
+  position: relative;
+  border: 1px solid rgb(61, 61, 61);
+  top: -7px;
+  font-size: 20px;
+}
+
+.form .formSelects form div span {
+  right: -5%;
+  bottom: 5px;
 }
 
 .inputFile {
@@ -93,7 +106,24 @@
 }
 
 .form button {
-  padding: 10px;
+  padding: 5px;
   font-weight: 500;
   float: right;
 }
+
+.btnDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btnBoxDisabled:hover:before {
+  content: 'Заполните все поля и свойства девайса';
+  font-size: 20px;
+  padding: 5px;
+  opacity: .6;
+  border-radius: 5px;
+  color: white;
+  background: red;
+  margin: 7px 20px 0 0;
+}
+

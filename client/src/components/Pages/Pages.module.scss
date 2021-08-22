@@ -24,26 +24,46 @@
   box-shadow: -1px -1px 1px rgb(61, 61, 61), 1px 1px 1px rgb(61, 61, 61);
 }
 
-.form {
-  position: relative;
-  width: 40px;
-  height: 30px;
+.limitLabel {
+  padding: 5px;
   display: flex;
-  margin-right: 50px;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
 
-  & input{
-    width: 30px;
+.limitTitle {
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+.form {
+  margin-left: auto;
+  position: relative;
+  width: 150px;
+  height: 40px;
+
+  & input {
+    width: 40px;
     height: 30px;
+    margin-right: 5px;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
     padding: 5px;
   }
+
+  & button {
+    height: 32px;
+    opacity: 0;
+  }
+
+  &:hover button {
+    opacity: 1;
+  }
+
+  & form div span {
+    bottom: 4px;
+    left: 150px;
+  }
 }
 
-.limitLabel {
-  margin-right: 10px;
-}
 
-.form form div span {
-  left: 90px;
-}

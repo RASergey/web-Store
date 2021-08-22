@@ -19,7 +19,9 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
             initialValues={initialValues}
             onSubmit={(values, {resetForm}) => {
                 createAction(values)
-                resetForm()
+                if (nameButton) {
+                    resetForm()
+                }
             }}
             validationSchema={schema}
         >
@@ -33,7 +35,7 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
                   handleSubmit,
                   dirty
               }) => (
-                <Form className={style.mainForm}>
+                <Form className={style.mainForm} autoсomplete='off' onChange={nameButton ? null : handleSubmit}>
                     {
                         inputs.map((input, index) => (
                             <div className={style.inputBox} key={index}>
@@ -43,7 +45,7 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
                                             return (
                                                 <div className={style.inputBox}>
                                                     <Field
-                                                        type={input.nameInput}
+                                                        type={input.typeInput}
                                                         as={input.typeInput}
                                                         name={input.nameInput}
                                                         value={values[`${input.nameInput}`]}
@@ -54,6 +56,7 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
                                                         tabIndex={input.tabIndex}
                                                         className={errors[`${input.nameInput}`] && touched[`${input.nameInput}`]
                                                             ? style.error : null}
+                                                        autoсomplete='off'
                                                     />
                                                     {errors[`${input.nameInput}`] && touched[`${input.nameInput}`]
                                                         ?
@@ -95,7 +98,6 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
                                                         id={input.nameInput}
                                                         name={input.nameInput}
                                                         type={input.typeInput}
-                                                        tabIndex={input.tabIndex}
                                                         hidden={true}
                                                         onChange={event => {
                                                             let file = event.currentTarget.files[0]
@@ -110,19 +112,20 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
                                                             </div>
                                                         )}
                                                     <div className={style.fileImageBox}>
+                                                        <button className={style.btnFile} type='button'>
+                                                            tabIndex={input.tabIndex}
+                                                            <label
+                                                                className={style.fileLabel}
+                                                                htmlFor={input.nameInput}
+                                                            >
+                                                                {!fileURL ? 'Добавить картинку' : 'Изменить картинку'}
+                                                            </label>
+                                                        </button>
                                                         {
                                                             fileURL
                                                                 ?
                                                                 <img className={style.fileImage} src={fileURL} alt='/'/>
-                                                                :
-                                                                <button>
-                                                                    <label
-                                                                        className={style.fileLabel}
-                                                                        htmlFor={input.nameInput}
-                                                                    >
-                                                                        Добавить картинку
-                                                                    </label>
-                                                                </button>
+                                                                : null
                                                         }
                                                     </div>
                                                 </div>
@@ -135,14 +138,18 @@ const FormsControls = ({inputs, createAction, schema, nameButton}) => {
                             < /div>
                         ))
                     }
-                    <button
-                        type={'submit'}
-                        className={`${style.btnSubmit} ${dirty && isValid ? "" : style.btnDisabled}`}
-                        disabled={!isValid && dirty}
-                        onClick={handleSubmit}
-                    >
-                        {nameButton}
-                    </button>
+                    {nameButton ?
+                        <button
+                            type='submit'
+                            className={`${style.btnSubmit} ${dirty && isValid ? "" : style.btnDisabled}`}
+                            disabled={!isValid && dirty}
+                            onClick={handleSubmit}
+                        >
+                            {nameButton}
+                        </button>
+                        :
+                        null
+                    }
                 </Form>
             )}
         </Formik>

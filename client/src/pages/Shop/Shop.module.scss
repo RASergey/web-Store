@@ -6,15 +6,22 @@
 }
 
 .sidebar {
-flex: 0 1 25%;
+  flex: 0 1 25%;
 }
 
 .mainPage {
   flex: 0 1 75%;
+  min-height: 93vh;
   margin-left: 30px;
   padding: 0 5px;
+  display: flex;
+  flex-direction: column;
 }
 
-.pages{
-padding: 0 0 20px;
+.deviceList {
+  flex: 1 1 auto;
+}
+
+.pages {
+  padding: 0 0 20px;
 }

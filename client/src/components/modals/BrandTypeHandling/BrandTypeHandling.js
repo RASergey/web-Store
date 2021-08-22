@@ -66,16 +66,16 @@ const BrandTypeHandling = observer(({nameModal, show, onHide}) => {
                         Добавить новый {nameModal === 'brands' ? 'Бренд' : 'Тип'}
                     </div>
                     <div>
-                        <FormsControls inputs={add} createAction={actionDevice} schema={schema} nameButton={'Добавить'} />
+                        <FormsControls inputs={add} createAction={actionDevice} schema={schema}
+                                       nameButton={'Добавить'}/>
                     </div>
                 </div>
-
                 <div className={style.form}>
                     <dir className={style.title}>
                         Удалить {nameModal === 'brands' ? 'Бренд' : 'Тип'}
                     </dir>
                     <div>
-                        <FormsControls inputs={remove} createAction={actionDevice} schema={schema} nameButton={'Удалить'} />
+                        <FormsControls inputs={remove} createAction={actionDevice} nameButton={'Удалить'}/>
                     </div>
                 </div>
             </section>

@@ -18,11 +18,9 @@ const Pages = observer(() => {
     for (let i = 0; i < pageCount; i++) {
         pages.push(i + 1)
     }
-
     const schema = yup.object().shape({
         limit: yup.number()
             .typeError('введите число')
-            .positive('не корректные данные')
             .integer('не корректные данные')
     })
 
@@ -31,30 +29,37 @@ const Pages = observer(() => {
         typeInput: 'input',
         id: 'input',
         initialValues: '',
+        placeholder: device.limit < 100 ? `${device.limit}` : ''
     }]
 
     const setLimit = useCallback((value) => {
-        device.setLimit(value.limit)
+        if (+value.limit) {
+            device.setLimit(Math.abs(value.limit))
+        } else {
+            device.setLimit(20)
+        }
     }, [device])
 
     return (
         <div className={style.pagination}>
-            <div className={style.rowPages}>
-                {pages.map(page => <button
-                    key={page}
-                    className={`${style.paginationNumber} ${device.page === page ? style.active : null}`}
-                    onClick={() => device.setPage(page)}
-                >
-                    {page}
-                </button>)}
-            </div>
-            {pages.length !== 0 ?
-                <div className={style.form}>
-                    <label className={style.limitLabel} htmlFor="input">Кол-во:</label>
-                    <FormsControls inputs={inputs} createAction={setLimit} schema={schema} nameButton={'Ok'} />
+            {pages.length > 1 ?
+                <div className={style.rowPages}>
+                    {pages.map(page => <button
+                        key={page}
+                        className={`${style.paginationNumber} ${device.page === page ? style.active : null}`}
+                        onClick={() => device.setPage(page)}
+                    >
+                        {page}
+                    </button>)}
                 </div>
                 : null
             }
+            <div className={style.form}>
+                <label className={style.limitLabel} htmlFor="input">
+                    <span className={style.limitTitle}>Кол-во:</span>
+                    <FormsControls inputs={inputs} createAction={setLimit} schema={schema} nameButton={'Ok'}/>
+                </label>
+            </div>
         </div>
     )
 })

@@ -49,6 +49,11 @@ export const fetchOneDevice = async (id) => {
     return data
 }
 
+export const deleteDevice = async (id) => {
+    const {data} = await $authHost.delete(`api/device/${id}`)
+    return {data}
+}
+
 export const getDevicesUserMarked = async () => {
     const {data} = await $authHost.get('api/rating/ratings')
     return data
@@ -56,7 +61,7 @@ export const getDevicesUserMarked = async () => {
 
 export const updateRatingDevice = async (rate, deviceId) => {
     const {data} = await $authHost.put('api/rating', {
-            rate, deviceId
+        rate, deviceId
     })
 
     return data

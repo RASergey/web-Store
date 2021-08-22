@@ -33,6 +33,10 @@
   justify-content: center;
 }
 
+.form div {
+  position: relative;
+}
+
 .form input {
   margin: 0 0 20px 10px;
 }
@@ -40,9 +44,13 @@
 .form button {
   flex: 0 0 240px;
   margin-left: auto;
-  padding: 10px 0;
   width: 90%;
   height: 45px;
   font-size: 20px;
   font-weight: 500;
+}
+
+.form form div span {
+  right: 24%;
+  bottom: 25px;
 }
